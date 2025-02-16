@@ -3,6 +3,28 @@
 @tailwind components;
 @tailwind utilities;
  
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("../public/Satoshi-Regular.woff2") format("woff2"),
+     url("../public/Satoshi-Regular.ttf") format("truetype");
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("../public/Satoshi-Bold.woff2") format("woff2"),
+       url("../public/Satoshi-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -61,6 +83,9 @@
     @apply bg-background text-foreground antialiased;
   }
 
+  html, body {
+    font-family: "Satoshi", sans-serif;
+  }
   .section-padding {
     @apply py-24 px-6 md:px-12 lg:px-24;
   }

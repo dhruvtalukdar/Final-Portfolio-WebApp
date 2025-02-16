@@ -33,6 +33,7 @@ const Navigation = () => {
     { href: "#about", label: "About" },
     { href: "#projects", label: "Projects" },
     { href: "#contact", label: "Contact" },
+    { href: "#resume", label: "Resume" },
   ];
 
   return (
@@ -47,7 +48,7 @@ const Navigation = () => {
             href="#home"
             className="text-xl font-semibold tracking-tight hover:opacity-80 transition-opacity"
           >
-            Portfolio
+            Dhruv's Portfolio
           </a>
 
           {/* Desktop Navigation */}

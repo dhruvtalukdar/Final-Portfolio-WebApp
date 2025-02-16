@@ -1,3 +1,4 @@
+// import { AccordionHeader } from "@radix-ui/react-accordion";
 
 const About = () => {
   const skills = [
