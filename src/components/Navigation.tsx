@@ -1,19 +1,32 @@
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { Toggle } from "@/components/ui/toggle";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
 
+    // Check initial dark mode preference
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setIsDark(true);
+      document.documentElement.classList.add("dark");
+    }
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const toggleDarkMode = () => {
+    setIsDark(!isDark);
+    document.documentElement.classList.toggle("dark");
+  };
 
   const navLinks = [
     { href: "#home", label: "Home" },
@@ -48,16 +61,34 @@ const Navigation = () => {
                 {label}
               </a>
             ))}
+            <Toggle
+              aria-label="Toggle dark mode"
+              pressed={isDark}
+              onPressedChange={toggleDarkMode}
+              className="p-2 hover:bg-secondary rounded-full transition-colors"
+            >
+              {isDark ? <Sun size={20} /> : <Moon size={20} />}
+            </Toggle>
           </div>
 
           {/* Mobile Navigation Toggle */}
-          <button
-            className="md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="md:hidden flex items-center gap-4">
+            <Toggle
+              aria-label="Toggle dark mode"
+              pressed={isDark}
+              onPressedChange={toggleDarkMode}
+              className="p-2 hover:bg-secondary rounded-full transition-colors"
+            >
+              {isDark ? <Sun size={20} /> : <Moon size={20} />}
+            </Toggle>
+            <button
+              className="p-2"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation Menu */}
